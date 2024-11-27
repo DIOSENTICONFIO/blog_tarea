@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Blogs</h1>
+
+    <!-- Tabla que muestra los artículos -->
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th colspan="3">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in articles %}
+            <tr>
+                <td>{{ article.title }}</td>
+                <td>{{ article.content }}</td>
+                <td><a href="{% url 'detail' article.id %}">Detail</a></td>
+                <td><a href="{% url 'edit' article.id %}">Edit</a></td>
+                <td><a href="{% url 'delete' article.id %}">Delete</a></td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">No articles found. <a href="{% url 'create' %}">Add a new blog</a>.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Enlace para agregar un nuevo blog -->
+    <br>
+    <a href="{% url 'create' %}">New Blog</a>
+</body>
+
+</html>
